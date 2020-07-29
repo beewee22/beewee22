@@ -1,4 +1,4 @@
-Today I Learned(or read)...
+#Today I Read & Learned...#
 
 #2020/07/29
 - [더 나은 UX의 관리자 페이지를 위해](https://youngminz.netlify.app/posts/more-better-admin-page)
