@@ -7,3 +7,6 @@
 
 #2020/08/25
 매일 하기로 하고 까먹었다;; 저번 주말(8/22)부터 [ReasonML](https://reasonml.github.io/ko/)을 들여다 보는 중. Reason React+NextJS를 섞어서 프로젝트 하나를 진행해 볼 생각.
+
+#2020/08/29
+- CRA(react-script)로 만든 프로젝트에서, 처음에 eslint를 따로 사용하겠다 선언하지 않은 경우 추후에 .eslintrc.* 파일을 생성해도 인식이 되지 않는다. 이럴 때 해결 방법은 .env 파일에 ```EXTEND_ESLINT=true``` 값을 추가하면 된다([블로그 게시물](https://medium.com/@michael.tandio/using-create-react-app-typescript-with-custom-eslint-rules-5fc5aec3ff10))
