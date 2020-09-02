@@ -13,6 +13,7 @@
 
 #2020/09/03
 - CRA(react-script)로 만든 프로젝트에서, IDE에선 타입추론에 문제가 없었는데 실제 빌드타임에서 엄한 오류를 뿜고 있었다. 
+
 문제: 문제가 되는 파일이 /src/@types/general.ts였고, typeRoots에 등록된 디렉토리에 있어서 바벨이 해당 파일의 Transfile을 건너뛰었기 때문에 eslint에서 해석하지 못해 생긴 문제였음.
 교훈: 
   1. typeRoots에는 d.ts 파일만 넣자 -_-;;
