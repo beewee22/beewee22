@@ -27,6 +27,8 @@
 
 - git에서 .gitignore 업데이트 없이 로컬에서 특정 파일만 변경을 무시하고 싶을 때:
 
-```git update-index --skip-worktree <file-list>```를 입력하면 됨.
-해제하고 싶으면 ```git update-index --no-skip-worktree <file-list>```를 입력.
-[스택오버플로우 답변 참고](https://stackoverflow.com/a/1753078)
+  ```git update-index --skip-worktree <file-list>```를 입력하면 됨.
+    
+  해제하고 싶으면 ```git update-index --no-skip-worktree <file-list>```를 입력.
+
+  [스택오버플로우 답변 참고](https://stackoverflow.com/a/1753078)
