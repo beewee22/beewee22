@@ -29,4 +29,4 @@
 
 ```git update-index --skip-worktree <file-list>```를 입력하면 됨.
 해제하고 싶으면 ```git update-index --no-skip-worktree <file-list>```를 입력.
-(스택오버플로우 답변 참고)[https://stackoverflow.com/a/1753078]
+[스택오버플로우 답변 참고](https://stackoverflow.com/a/1753078)
