@@ -1,5 +1,6 @@
 **DevOps Engineer && Front-End Engineer🤪**
 
+[![beewee22's github stats](https://github-readme-stats.vercel.app/api?username=beewee22)](https://github.com/anuraghazra/github-readme-stats)
 
 
 <!--
