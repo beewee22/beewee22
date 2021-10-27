@@ -32,3 +32,19 @@
   해제하고 싶으면 ```git update-index --no-skip-worktree <file-list>```를 입력.
 
   [스택오버플로우 답변 참고](https://stackoverflow.com/a/1753078)
+
+# 2021/10/27
+- 엄청 오랜만에 업뎃함.. 그동안 배운게 없는게 아니고 쓰는걸 잊었는데 막상 또 안쓰니까 배운걸 까먹는 악순환 ㅋ
+- **문제의 발단**: 현재 프로젝트를 vite-react-typescript 템플릿으로 만들어서 잘 쓰고 있었는데, 테스트를 위해 Jest를 설치함
+- **증상**: Jest에서 vite에서 환경변수를 참조할 때 사용하는 ```import.meta.env...``` 구문을 해석하지 못해서 에러가 남
+- **원인**: vite는 esm을 사용하고, 환경변수 주입도 일반적인 nodejs의 ```process.env``` 안이 아닌 ```import.meta.env``` 내에 주입되는데, 이건 nodejs에서 아직 기본적으로 지원하는 구문이 아님
+- **그래서 뭘 했나?**:
+  1. `Babel이라면 해결해 줄거야!` 라는 헛된 희망을 품고 `babel-jest` 와 `babel-plugin-transform-import-meta` 를 설치해서 `jest.config.ts` 에 설정함 => 안됨
+  2. package.json의 node `run script`에 jest 실행시 node에 `--experimental-vm-modules` 플래그를 줘서 실행해봄 
+    => 오류 메세지가 바뀌었는데, `import.meta`를 모듈의 밖에서 사용할 수 없다고 나옴
+    => 이 부분을 찾아보니, `package.json`에 ```"type": "module"```로 바꾸고 js를 mjs로 바꾸라는 소리가 나옴. 우리가 갈 길과는 다른 곳이구나 깨닫고 다른 방법을 찾음
+  3. `import.meta`를 접근 가능한 상황에만 참조하면 되지 않을까? 하고 ```process.env.NODE_ENV === 'test'```일 경우엔 ```process.env```를 리턴하도록 변경해봤으나, 렉시컬 환경엑서 이미 오류를 터뜨림(즉, 실제로 실행되지 않는 코드여도 ```import.meta``` 구문이 있으면 에러 남 ㅡㅡ
+- **어케 해결함?**:
+  인류가 문자를 발명하고 수 없이 많은걸 문서로 남겨놨는데 왜 영장류로 태어난 나는 문서를 안 읽지? Jest 문서에 이미 답이 있었음 ㅡㅡ (https://jestjs.io/docs/configuration#extensionstotreatasesm-arraystring)
+  `jest.config.ts`에 ```extensionsToTreatAsEsm: ['.ts', '.tsx']``` 설정을 추가한 뒤(js 추가하면 에러남), 아까 node `run script`에 ```"test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"``` 요런 식으로 ```--experimental-vm-modules``` 옵션 추가해서 실행해주면 해결된다.
+
